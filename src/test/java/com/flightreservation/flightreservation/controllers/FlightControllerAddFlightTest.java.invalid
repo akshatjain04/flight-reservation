@@ -53,6 +53,8 @@ Validation:
     The test ensures that the system can handle unexpected errors, such as database outages, when attempting to add a flight. This is significant in order to maintain the stability of the application.
 
 roost_feedback [4/7/2025, 5:35:24 PM]:The function setup() MUST look like this:\r\n```\r\n public void setUp() throws Exception {\r\n    }\r\n```\r\n\r\nNOTE: DO NOT make any other modification in the test code
+
+roost_feedback [4/7/2025, 5:39:05 PM]:The function setup() MUST look like this:\r\n```\r\n public void setUp() throws Exception {\r\n    }\r\n```\r\n\r\nNOTE: DO NOT make any other modification in the test code
 */
 
 // ********RoostGPT********

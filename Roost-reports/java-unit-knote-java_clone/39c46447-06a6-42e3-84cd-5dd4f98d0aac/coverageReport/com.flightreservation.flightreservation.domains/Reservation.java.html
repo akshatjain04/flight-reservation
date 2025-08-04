@@ -4,55 +4,56 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-<span class="nc" id="L7">public class Reservation extends AbstractEntity {</span>
+<span class="nc" id="L7">public class Reservation extends AbstractEntity{</span>
 
-	private boolean checkedIn;
+    private boolean checkedIn;
+    private int numberOfBags;
+    @OneToOne
+    private Passenger passenger;
+    @OneToOne
+    private Flight flight;
 
-	private int numberOfBags;
 
-	@OneToOne
-	private Passenger passenger;
+    public boolean isCheckedin() {
+<span class="nc" id="L18">        return checkedIn;</span>
+    }
 
-	@OneToOne
-	private Flight flight;
+    public void setCheckedin(boolean checkedin) {
+<span class="nc" id="L22">        this.checkedIn = checkedin;</span>
+<span class="nc" id="L23">    }</span>
 
-	public boolean isCheckedin() {
-<span class="nc" id="L20">		return checkedIn;</span>
-	}
+    public int getNumberOfBags() {
+<span class="nc" id="L26">        return numberOfBags;</span>
+    }
 
-	public void setCheckedin(boolean checkedin) {
-<span class="nc" id="L24">		this.checkedIn = checkedin;</span>
-<span class="nc" id="L25">	}</span>
+    public void setNumberOfBags(int numberOfBags) {
+<span class="nc" id="L30">        this.numberOfBags = numberOfBags;</span>
+<span class="nc" id="L31">    }</span>
 
-	public int getNumberOfBags() {
-<span class="nc" id="L28">		return numberOfBags;</span>
-	}
+    public Passenger getPassenger() {
+<span class="nc" id="L34">        return passenger;</span>
+    }
 
-	public void setNumberOfBags(int numberOfBags) {
-<span class="nc" id="L32">		this.numberOfBags = numberOfBags;</span>
-<span class="nc" id="L33">	}</span>
+    public void setPassenger(Passenger passenger) {
+<span class="nc" id="L38">        this.passenger = passenger;</span>
+<span class="nc" id="L39">    }</span>
 
-	public Passenger getPassenger() {
-<span class="nc" id="L36">		return passenger;</span>
-	}
+    public Flight getFlight() {
+<span class="nc" id="L42">        return flight;</span>
+    }
 
-	public void setPassenger(Passenger passenger) {
-<span class="nc" id="L40">		this.passenger = passenger;</span>
-<span class="nc" id="L41">	}</span>
+    public void setFlight(Flight flight) {
+<span class="nc" id="L46">        this.flight = flight;</span>
+<span class="nc" id="L47">    }</span>
 
-	public Flight getFlight() {
-<span class="nc" id="L44">		return flight;</span>
-	}
-
-	public void setFlight(Flight flight) {
-<span class="nc" id="L48">		this.flight = flight;</span>
-<span class="nc" id="L49">	}</span>
-
-	@Override
-	public String toString() {
-<span class="nc" id="L53">		return &quot;Reservation{&quot; + &quot;checkedin=&quot; + checkedIn + &quot;, numberOfBags=&quot; + numberOfBags + &quot;, passenger=&quot; + passenger</span>
-				+ &quot;, flight=&quot; + flight + '}';
-	}
-
+    @Override
+    public String toString() {
+<span class="nc" id="L51">        return &quot;Reservation{&quot; +</span>
+                &quot;checkedin=&quot; + checkedIn +
+                &quot;, numberOfBags=&quot; + numberOfBags +
+                &quot;, passenger=&quot; + passenger +
+                &quot;, flight=&quot; + flight +
+                '}';
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

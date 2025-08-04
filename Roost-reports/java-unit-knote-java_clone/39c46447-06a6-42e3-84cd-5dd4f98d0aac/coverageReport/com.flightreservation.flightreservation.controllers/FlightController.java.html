@@ -18,33 +18,33 @@ import java.util.List;
 @Controller
 <span class="nc" id="L19">public class FlightController {</span>
 
-<span class="nc" id="L21">	private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);</span>
+<span class="nc" id="L21">    private static final Logger LOGGER= LoggerFactory.getLogger(FlightController.class);</span>
 
-	@Autowired
-	FlightRepository flightRepository;
+    @Autowired
+    FlightRepository flightRepository;
 
-	@RequestMapping(&quot;/findFlights&quot;)
-	public String findFLights(@RequestParam(&quot;source&quot;) String source, @RequestParam(&quot;destination&quot;) String destination,
-			@RequestParam(&quot;departDate&quot;) @DateTimeFormat(pattern = &quot;MM-dd-yyyy&quot;) Date departDate, ModelMap modelMap) {
+    @RequestMapping(&quot;/findFlights&quot;)
+    public String findFLights(@RequestParam(&quot;source&quot;) String source, @RequestParam(&quot;destination&quot;) String destination,
+                              @RequestParam(&quot;departDate&quot;) @DateTimeFormat(pattern = &quot;MM-dd-yyyy&quot;) Date departDate, ModelMap modelMap) {
 
-<span class="nc" id="L30">		LOGGER.info(&quot;Inside findFlights() From:&quot; + source + &quot; TO:&quot; + destination + &quot;Departure Date: &quot; + departDate);</span>
-<span class="nc" id="L31">		List&lt;Flight&gt; flights = flightRepository.findFlights(source, destination, departDate);</span>
-<span class="nc" id="L32">		modelMap.addAttribute(&quot;flights&quot;, flights);</span>
-<span class="nc" id="L33">		LOGGER.info(&quot;Flights found are&quot; + flights.toString());</span>
-<span class="nc" id="L34">		return &quot;flights/displayFlights&quot;;</span>
-	}
+<span class="nc" id="L30">        LOGGER.info(&quot;Inside findFlights() From:&quot; + source + &quot; TO:&quot; + destination + &quot;Departure Date: &quot; + departDate);</span>
+<span class="nc" id="L31">        List&lt;Flight&gt; flights =flightRepository.findFlights(source,destination,departDate);</span>
+<span class="nc" id="L32">        modelMap.addAttribute(&quot;flights&quot;,flights);</span>
+<span class="nc" id="L33">        LOGGER.info(&quot;Flights found are&quot;+flights.toString());</span>
+<span class="nc" id="L34">        return &quot;flights/displayFlights&quot;;</span>
+    }
 
-	@RequestMapping(&quot;/admin/showAddFlight&quot;)
-	public String showAddFlightPage() {
-<span class="nc" id="L39">		return &quot;flights/addFlight&quot;;</span>
-	}
+    @RequestMapping(&quot;/admin/showAddFlight&quot;)
+    public String showAddFlightPage(){
+<span class="nc" id="L39">        return &quot;flights/addFlight&quot;;</span>
+    }
 
-	@RequestMapping(&quot;/admin/addFlight&quot;)
-	public String addFlight(@ModelAttribute(&quot;flight&quot;) Flight flight, ModelMap modelmap) {
-<span class="nc" id="L44">		flightRepository.save(flight);</span>
-<span class="nc" id="L45">		modelmap.addAttribute(&quot;msg&quot;, &quot;Flight Added Successfully&quot;);</span>
-<span class="nc" id="L46">		return &quot;flights/addFlight&quot;;</span>
-	}
+    @RequestMapping(&quot;/admin/addFlight&quot;)
+    public String addFlight(@ModelAttribute(&quot;flight&quot;) Flight flight,ModelMap modelmap){
+<span class="nc" id="L44">       flightRepository.save(flight);</span>
+<span class="nc" id="L45">       modelmap.addAttribute(&quot;msg&quot;,&quot;Flight Added Successfully&quot;);</span>
+<span class="nc" id="L46">       return &quot;flights/addFlight&quot;;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -21,66 +21,65 @@ import java.util.Optional;
 @Controller
 <span class="nc" id="L22">public class UserController {</span>
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Autowired
-	private SecurityService securityService;
 
-<span class="nc" id="L33">	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);</span>
+    @Autowired
+    private SecurityService securityService;
 
-	@RequestMapping(&quot;/showReg&quot;)
-	public String showRegistrationPage() {
-<span class="nc" id="L37">		LOGGER.info(&quot;Inside showRegistrationPage()&quot;);</span>
-<span class="nc" id="L38">		return &quot;login/registerUser&quot;;</span>
-	}
+<span class="nc" id="L34">    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);</span>
 
-	@RequestMapping(value = &quot;/registerUser&quot;, method = RequestMethod.POST)
-	public String register(@ModelAttribute(&quot;user&quot;) User user) {
-		// handle error here what is email already exists.
-<span class="nc" id="L44">		LOGGER.info(&quot;{} Inside register()&quot;, user.getEmail());</span>
-<span class="nc" id="L45">		Optional&lt;User&gt; foundUser = userRepository.findByEmail(user.getEmail());</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">		if (foundUser.isPresent()) {</span>
-<span class="nc" id="L47">			LOGGER.error(&quot;User is already registered with email {} &quot;, user.getEmail());</span>
-<span class="nc" id="L48">			throw new UserAlreadyRegistered(&quot;Email exists: &quot; + user.getEmail());</span>
-		}
-<span class="nc" id="L50">		LOGGER.info(&quot;Email Exists: &quot; + user.getEmail());</span>
-<span class="nc" id="L51">		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));</span>
-<span class="nc" id="L52">		userRepository.save(user);</span>
-<span class="nc" id="L53">		return &quot;login/login&quot;;</span>
-	}
+    @RequestMapping(&quot;/showReg&quot;)
+    public String showRegistrationPage() {
+<span class="nc" id="L38">        LOGGER.info(&quot;Inside showRegistrationPage()&quot;);</span>
+<span class="nc" id="L39">        return &quot;login/registerUser&quot;;</span>
+    }
 
-	@RequestMapping(&quot;/showLogin&quot;)
-	public String showLoginPage() {
-<span class="nc" id="L58">		LOGGER.info(&quot;Inside showLoginPage()&quot;);</span>
-<span class="nc" id="L59">		return &quot;login/login&quot;;</span>
-	}
+    @RequestMapping(value = &quot;/registerUser&quot;, method = RequestMethod.POST)
+    public String register(@ModelAttribute(&quot;user&quot;) User user) {
+        //handle error here what is email already exists.
+<span class="nc" id="L45">        LOGGER.info(&quot;{} Inside register()&quot;, user.getEmail());</span>
+<span class="nc" id="L46">        Optional&lt;User&gt; foundUser= userRepository.findByEmail(user.getEmail());</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if(foundUser.isPresent()){</span>
+<span class="nc" id="L48">            LOGGER.error(&quot;User is already registered with email {} &quot;,user.getEmail());</span>
+<span class="nc" id="L49">            throw new UserAlreadyRegistered(&quot;Email exists: &quot;+user.getEmail());</span>
+        }
+<span class="nc" id="L51">        LOGGER.info(&quot;Email Exists: &quot;+user.getEmail());</span>
+<span class="nc" id="L52">        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));</span>
+<span class="nc" id="L53">        userRepository.save(user);</span>
+<span class="nc" id="L54">        return &quot;login/login&quot;;</span>
+    }
 
-	@RequestMapping(value = &quot;/login&quot;, method = RequestMethod.POST)
-	public String login(@RequestParam(&quot;email&quot;) String email, @RequestParam(&quot;password&quot;) String password,
-			ModelMap modelmap) {
-<span class="nc" id="L65">		LOGGER.info(&quot;{} Inside login()&quot;, email);</span>
-<span class="nc" id="L66">		Optional&lt;User&gt; foundUser = userRepository.findByEmail(email);</span>
-		// handle error here what if no user found
-<span class="nc bnc" id="L68" title="All 2 branches missed.">		if (!foundUser.isPresent()) {</span>
-<span class="nc" id="L69">			LOGGER.error(&quot;Email not found: &quot; + email);</span>
-<span class="nc" id="L70">			throw new UserNotFound(&quot;Email not found: &quot; + email);</span>
-		}
-<span class="nc" id="L72">		LOGGER.info(&quot;Email Exists: &quot; + email);</span>
-<span class="nc" id="L73">		boolean loginResponse = securityService.login(email, password);</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">		if (loginResponse) {</span>
-<span class="nc" id="L75">			modelmap.addAttribute(&quot;msg&quot;, &quot;Successfully logged in&quot;);</span>
-<span class="nc" id="L76">			return &quot;flights/findFlights&quot;;</span>
-		}
-		else {
-<span class="nc" id="L79">			LOGGER.info(&quot;User entered Invalid credentials email:{} and password:{}&quot;, email, password);</span>
-<span class="nc" id="L80">			modelmap.addAttribute(&quot;msg&quot;, &quot;Invalid username or password&quot;);</span>
-		}
-<span class="nc" id="L82">		return &quot;login/login&quot;;</span>
-	}
+    @RequestMapping(&quot;/showLogin&quot;)
+    public String showLoginPage() {
+<span class="nc" id="L59">        LOGGER.info(&quot;Inside showLoginPage()&quot;);</span>
+<span class="nc" id="L60">        return &quot;login/login&quot;;</span>
+    }
+
+    @RequestMapping(value=&quot;/login&quot;,method = RequestMethod.POST)
+    public String login(@RequestParam(&quot;email&quot;) String email, @RequestParam(&quot;password&quot;) String password, ModelMap modelmap){
+<span class="nc" id="L65">        LOGGER.info(&quot;{} Inside login()&quot;,email);</span>
+<span class="nc" id="L66">        Optional&lt;User&gt; foundUser=userRepository.findByEmail(email);</span>
+        // handle error here what if no user found
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if(!foundUser.isPresent()){</span>
+<span class="nc" id="L69">            LOGGER.error(&quot;Email not found: &quot;+email);</span>
+<span class="nc" id="L70">            throw new UserNotFound(&quot;Email not found: &quot;+email);</span>
+        }
+<span class="nc" id="L72">        LOGGER.info(&quot;Email Exists: &quot;+email);</span>
+<span class="nc" id="L73">        boolean loginResponse = securityService.login(email, password);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if(loginResponse) {</span>
+<span class="nc" id="L75">            modelmap.addAttribute(&quot;msg&quot;,&quot;Successfully logged in&quot;);</span>
+<span class="nc" id="L76">            return &quot;flights/findFlights&quot;;</span>
+        } else {
+<span class="nc" id="L78">            LOGGER.info(&quot;User entered Invalid credentials email:{} and password:{}&quot;,email,password);</span>
+<span class="nc" id="L79">            modelmap.addAttribute(&quot;msg&quot;,&quot;Invalid username or password&quot;);</span>
+        }
+<span class="nc" id="L81">        return &quot;login/login&quot;;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

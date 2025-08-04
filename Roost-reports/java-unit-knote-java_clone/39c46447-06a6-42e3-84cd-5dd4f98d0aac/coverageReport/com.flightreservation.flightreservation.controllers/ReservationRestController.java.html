@@ -14,37 +14,36 @@ import java.util.Optional;
 @RestController
 <span class="nc" id="L15">public class ReservationRestController {</span>
 
-	@Autowired
-	ReservationRepository reservationRepository;
+    @Autowired
+    ReservationRepository reservationRepository;
+<span class="nc" id="L19">    private static final Logger LOGGER = LoggerFactory.getLogger(ReservationRestController.class);</span>
 
-<span class="nc" id="L20">	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationRestController.class);</span>
+    @RequestMapping(&quot;/reservations/{id}&quot;)
+    public Reservation findReservation(@PathVariable(&quot;id&quot;) Long id){
+        // handle error here what if no reservation found
+<span class="nc" id="L24">        LOGGER.info(&quot;Inside findReservation() for id: &quot; + id);</span>
+<span class="nc" id="L25">        Optional&lt;Reservation&gt; reservation=reservationRepository.findById(id);</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if(!reservation.isPresent()){</span>
+<span class="nc" id="L27">            LOGGER.error(&quot;No reservation exist with id &quot;+id);</span>
+<span class="nc" id="L28">            throw new ReservationNotFound(&quot;No reservation exist with id &quot;+id);</span>
+        }
+<span class="nc" id="L30">        return reservation.get();</span>
+    }
 
-	@RequestMapping(&quot;/reservations/{id}&quot;)
-	public Reservation findReservation(@PathVariable(&quot;id&quot;) Long id) {
-		// handle error here what if no reservation found
-<span class="nc" id="L25">		LOGGER.info(&quot;Inside findReservation() for id: &quot; + id);</span>
-<span class="nc" id="L26">		Optional&lt;Reservation&gt; reservation = reservationRepository.findById(id);</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">		if (!reservation.isPresent()) {</span>
-<span class="nc" id="L28">			LOGGER.error(&quot;No reservation exist with id &quot; + id);</span>
-<span class="nc" id="L29">			throw new ReservationNotFound(&quot;No reservation exist with id &quot; + id);</span>
-		}
-<span class="nc" id="L31">		return reservation.get();</span>
-	}
 
-	@RequestMapping(value = &quot;/reservations&quot;, method = RequestMethod.POST)
-	public Reservation updateReservation(@RequestBody ReservationUpdateRequest reservationUpdateRequest) {
-<span class="nc" id="L36">		Optional&lt;Reservation&gt; reservation = reservationRepository.findById(reservationUpdateRequest.getId());</span>
-		// handle error here what if no reservation found
-<span class="nc" id="L38">		LOGGER.info(&quot;Inside updateReservation() for &quot; + reservationUpdateRequest);</span>
-<span class="nc bnc" id="L39" title="All 2 branches missed.">		if (!reservation.isPresent()) {</span>
-<span class="nc" id="L40">			LOGGER.error(&quot;No reservation exist with id &quot; + reservationUpdateRequest.getId());</span>
-<span class="nc" id="L41">			throw new ReservationNotFound(&quot;No reservation exist with id &quot; + reservationUpdateRequest.getId());</span>
-		}
-<span class="nc" id="L43">		reservation.get().setNumberOfBags(reservationUpdateRequest.getNumberOfBags());</span>
-<span class="nc" id="L44">		reservation.get().setCheckedin(reservationUpdateRequest.isCheckedIn());</span>
-<span class="nc" id="L45">		LOGGER.info(&quot;Saving Reservation&quot;);</span>
-<span class="nc" id="L46">		return reservationRepository.save(reservation.get());</span>
-	}
-
+    @RequestMapping(value = &quot;/reservations&quot;, method = RequestMethod.POST)
+    public Reservation updateReservation(@RequestBody ReservationUpdateRequest reservationUpdateRequest){
+<span class="nc" id="L36">        Optional&lt;Reservation&gt; reservation=reservationRepository.findById(reservationUpdateRequest.getId());</span>
+        // handle error here what if no reservation found
+<span class="nc" id="L38">        LOGGER.info(&quot;Inside updateReservation() for &quot; + reservationUpdateRequest);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if(!reservation.isPresent()){</span>
+<span class="nc" id="L40">            LOGGER.error(&quot;No reservation exist with id &quot;+reservationUpdateRequest.getId());</span>
+<span class="nc" id="L41">            throw new ReservationNotFound(&quot;No reservation exist with id &quot;+reservationUpdateRequest.getId());</span>
+        }
+<span class="nc" id="L43">        reservation.get().setNumberOfBags(reservationUpdateRequest.getNumberOfBags());</span>
+<span class="nc" id="L44">        reservation.get().setCheckedin(reservationUpdateRequest.isCheckedIn());</span>
+<span class="nc" id="L45">        LOGGER.info(&quot;Saving Reservation&quot;);</span>
+<span class="nc" id="L46">        return reservationRepository.save(reservation.get());</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -6,74 +6,74 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-<span class="nc" id="L9">public class Flight extends AbstractEntity {</span>
+<span class="nc" id="L9">public class Flight extends AbstractEntity{</span>
 
-	private String flightNumber;
+    private String flightNumber;
+    private String operatingAirlines;
+    private String departureCity;
+    private String arrivalCity;
+    private Date dateOfDeparture;
+    private Timestamp estimatedDepartureTime;
 
-	private String operatingAirlines;
 
-	private String departureCity;
+    public String getFlightNumber() {
+<span class="nc" id="L20">        return flightNumber;</span>
+    }
 
-	private String arrivalCity;
+    public void setFlightNumber(String flightNumber) {
+<span class="nc" id="L24">        this.flightNumber = flightNumber;</span>
+<span class="nc" id="L25">    }</span>
 
-	private Date dateOfDeparture;
+    public String getOperatingAirlines() {
+<span class="nc" id="L28">        return operatingAirlines;</span>
+    }
 
-	private Timestamp estimatedDepartureTime;
+    public void setOperatingAirlines(String operatingAirlines) {
+<span class="nc" id="L32">        this.operatingAirlines = operatingAirlines;</span>
+<span class="nc" id="L33">    }</span>
 
-	public String getFlightNumber() {
-<span class="nc" id="L24">		return flightNumber;</span>
-	}
+    public String getDepartureCity() {
+<span class="nc" id="L36">        return departureCity;</span>
+    }
 
-	public void setFlightNumber(String flightNumber) {
-<span class="nc" id="L28">		this.flightNumber = flightNumber;</span>
-<span class="nc" id="L29">	}</span>
+    public void setDepartureCity(String departureCity) {
+<span class="nc" id="L40">        this.departureCity = departureCity;</span>
+<span class="nc" id="L41">    }</span>
 
-	public String getOperatingAirlines() {
-<span class="nc" id="L32">		return operatingAirlines;</span>
-	}
+    public String getArrivalCity() {
+<span class="nc" id="L44">        return arrivalCity;</span>
+    }
 
-	public void setOperatingAirlines(String operatingAirlines) {
-<span class="nc" id="L36">		this.operatingAirlines = operatingAirlines;</span>
-<span class="nc" id="L37">	}</span>
+    public void setArrivalCity(String arrivalCity) {
+<span class="nc" id="L48">        this.arrivalCity = arrivalCity;</span>
+<span class="nc" id="L49">    }</span>
 
-	public String getDepartureCity() {
-<span class="nc" id="L40">		return departureCity;</span>
-	}
+    public Date getDateOfDeparture() {
+<span class="nc" id="L52">        return dateOfDeparture;</span>
+    }
 
-	public void setDepartureCity(String departureCity) {
-<span class="nc" id="L44">		this.departureCity = departureCity;</span>
-<span class="nc" id="L45">	}</span>
+    public void setDateOfDeparture(Date dateOfDeparture) {
+<span class="nc" id="L56">        this.dateOfDeparture = dateOfDeparture;</span>
+<span class="nc" id="L57">    }</span>
 
-	public String getArrivalCity() {
-<span class="nc" id="L48">		return arrivalCity;</span>
-	}
+    public Timestamp getEstimatedDepartureTime() {
+<span class="nc" id="L60">        return estimatedDepartureTime;</span>
+    }
 
-	public void setArrivalCity(String arrivalCity) {
-<span class="nc" id="L52">		this.arrivalCity = arrivalCity;</span>
-<span class="nc" id="L53">	}</span>
+    public void setEstimatedDepartureTime(Timestamp estimatedDepartureTime) {
+<span class="nc" id="L64">        this.estimatedDepartureTime = estimatedDepartureTime;</span>
+<span class="nc" id="L65">    }</span>
 
-	public Date getDateOfDeparture() {
-<span class="nc" id="L56">		return dateOfDeparture;</span>
-	}
-
-	public void setDateOfDeparture(Date dateOfDeparture) {
-<span class="nc" id="L60">		this.dateOfDeparture = dateOfDeparture;</span>
-<span class="nc" id="L61">	}</span>
-
-	public Timestamp getEstimatedDepartureTime() {
-<span class="nc" id="L64">		return estimatedDepartureTime;</span>
-	}
-
-	public void setEstimatedDepartureTime(Timestamp estimatedDepartureTime) {
-<span class="nc" id="L68">		this.estimatedDepartureTime = estimatedDepartureTime;</span>
-<span class="nc" id="L69">	}</span>
-
-	@Override
-	public String toString() {
-<span class="nc" id="L73">		return &quot;Flight{&quot; + &quot;flightNumber='&quot; + flightNumber + '\'' + &quot;, operatingAirlines='&quot; + operatingAirlines + '\''</span>
-				+ &quot;, departureCity='&quot; + departureCity + '\'' + &quot;, arrivalCity='&quot; + arrivalCity + '\''
-				+ &quot;, dateOfDeparture=&quot; + dateOfDeparture + &quot;, estimatedDepartureTime=&quot; + estimatedDepartureTime + '}';
-	}
-
+    @Override
+    public String toString() {
+<span class="nc" id="L69">        return &quot;Flight{&quot; +</span>
+                &quot;flightNumber='&quot; + flightNumber + '\'' +
+                &quot;, operatingAirlines='&quot; + operatingAirlines + '\'' +
+                &quot;, departureCity='&quot; + departureCity + '\'' +
+                &quot;, arrivalCity='&quot; + arrivalCity + '\'' +
+                &quot;, dateOfDeparture=&quot; + dateOfDeparture +
+                &quot;, estimatedDepartureTime=&quot; + estimatedDepartureTime +
+                '}';
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

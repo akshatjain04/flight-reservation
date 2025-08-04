@@ -14,31 +14,24 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 <span class="nc" id="L15">public class WebSecurityConfig extends WebSecurityConfigurerAdapter {</span>
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-<span class="nc" id="L19">		return new BCryptPasswordEncoder();</span>
-	}
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+<span class="nc" id="L19">        return new BCryptPasswordEncoder();</span>
+    }
 
-	@Bean
-	public AuthenticationManager customAuthenticationManager() throws Exception {
-<span class="nc" id="L24">		return authenticationManager();</span>
-	}
+    @Bean
+    public AuthenticationManager customAuthenticationManager() throws Exception {
+<span class="nc" id="L24">        return authenticationManager();</span>
+    }
 
-	@Override
-	public void configure(HttpSecurity httpSecurity) throws Exception {
-<span class="nc" id="L29">		httpSecurity.authorizeRequests()</span>
-<span class="nc" id="L30">			.antMatchers(&quot;/showReg&quot;, &quot;/&quot;, &quot;/index.html&quot;, &quot;/registerUser&quot;, &quot;/login&quot;, &quot;/showLogin&quot;, &quot;/login/*&quot;)</span>
-<span class="nc" id="L31">			.permitAll()</span>
-<span class="nc" id="L32">			.antMatchers(&quot;/css/**&quot;, &quot;/lib/**&quot;, &quot;/images/**&quot;, &quot;/js/**&quot;)</span>
-<span class="nc" id="L33">			.permitAll()</span>
-<span class="nc" id="L34">			.antMatchers(&quot;/admin/showAddFlight&quot;, &quot;/admin/admin/addFlight&quot;, &quot;/admin/*&quot;)</span>
-<span class="nc" id="L35">			.hasAnyAuthority(&quot;ADMIN&quot;)</span>
-<span class="nc" id="L36">			.anyRequest()</span>
-<span class="nc" id="L37">			.authenticated()</span>
-<span class="nc" id="L38">			.and()</span>
-<span class="nc" id="L39">			.csrf()</span>
-<span class="nc" id="L40">			.disable();</span>
-<span class="nc" id="L41">	}</span>
-
+    @Override
+    public void configure(HttpSecurity httpSecurity) throws Exception{
+<span class="nc" id="L29">        httpSecurity.authorizeRequests()</span>
+<span class="nc" id="L30">                .antMatchers(&quot;/showReg&quot;, &quot;/&quot;, &quot;/index.html&quot;, &quot;/registerUser&quot;, &quot;/login&quot;, &quot;/showLogin&quot;, &quot;/login/*&quot;)</span>
+<span class="nc" id="L31">                .permitAll()</span>
+<span class="nc" id="L32">                .antMatchers(&quot;/css/**&quot;,&quot;/lib/**&quot;,&quot;/images/**&quot;,&quot;/js/**&quot;).permitAll()</span>
+<span class="nc" id="L33">                .antMatchers(&quot;/admin/showAddFlight&quot;,&quot;/admin/admin/addFlight&quot;,&quot;/admin/*&quot;).hasAnyAuthority(&quot;ADMIN&quot;).anyRequest().authenticated()</span>
+<span class="nc" id="L34">                .and().csrf().disable();</span>
+<span class="nc" id="L35">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

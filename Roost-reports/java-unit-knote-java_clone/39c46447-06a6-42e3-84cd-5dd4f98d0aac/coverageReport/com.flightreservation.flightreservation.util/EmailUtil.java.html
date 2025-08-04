@@ -15,35 +15,33 @@ import java.io.File;
 @Component
 <span class="nc" id="L16">public class EmailUtil {</span>
 
-<span class="nc" id="L18">	@Value(&quot;${com.flightreservation.flightreservation.itinerary.email.body}&quot;)</span>
-	private String EMAIL_BODY = &quot;Please find your Itinerary attached.&quot;;
+<span class="nc" id="L18">    @Value(&quot;${com.flightreservation.flightreservation.itinerary.email.body}&quot;)</span>
+    private String EMAIL_BODY = &quot;Please find your Itinerary attached.&quot;;
 
-<span class="nc" id="L21">	@Value(&quot;${com.flightreservation.flightreservation.itinerary.email.subject&quot;)</span>
-	private String EMAIL_SUBJECT = &quot;Itinerary for your Flight&quot;;
+<span class="nc" id="L21">    @Value(&quot;${com.flightreservation.flightreservation.itinerary.email.subject&quot;)</span>
+    private String EMAIL_SUBJECT = &quot;Itinerary for your Flight&quot;;
 
-	@Autowired
-	private JavaMailSender javaMailSender;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-<span class="nc" id="L27">	private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);</span>
+<span class="nc" id="L27">    private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);</span>
 
-	public void sendItenary(String toAddress, String filePath) {
-<span class="nc" id="L30">		LOGGER.info(&quot;Inside sendItinerary()&quot;);</span>
-<span class="nc" id="L31">		MimeMessage message = javaMailSender.createMimeMessage();</span>
+    public void sendItenary(String toAddress,String filePath){
+<span class="nc" id="L30">        LOGGER.info(&quot;Inside sendItinerary()&quot;);</span>
+<span class="nc" id="L31">        MimeMessage message=javaMailSender.createMimeMessage();</span>
 
-		try {
-<span class="nc" id="L34">			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);</span>
-<span class="nc" id="L35">			messageHelper.setTo(toAddress);</span>
-<span class="nc" id="L36">			messageHelper.setSubject(EMAIL_SUBJECT);</span>
-<span class="nc" id="L37">			messageHelper.setText(EMAIL_BODY);</span>
-<span class="nc" id="L38">			messageHelper.addAttachment(&quot;Itinearary&quot;, new File(filePath));</span>
-<span class="nc" id="L39">			javaMailSender.send(message);</span>
-<span class="nc" id="L40">			LOGGER.info(&quot;Email sent: &quot; + message);</span>
-		}
-<span class="nc" id="L42">		catch (MessagingException e) {</span>
-<span class="nc" id="L43">			LOGGER.error(&quot; Error Inside sendItinerary(): {}&quot;, e);</span>
-<span class="nc" id="L44">			System.out.println(&quot;Exception inside sendItinerary&quot; + e);</span>
-<span class="nc" id="L45">		}</span>
-<span class="nc" id="L46">	}</span>
-
+        try {
+<span class="nc" id="L34">            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);</span>
+<span class="nc" id="L35">            messageHelper.setTo(toAddress);</span>
+<span class="nc" id="L36">            messageHelper.setSubject(EMAIL_SUBJECT);</span>
+<span class="nc" id="L37">            messageHelper.setText(EMAIL_BODY);</span>
+<span class="nc" id="L38">            messageHelper.addAttachment(&quot;Itinearary&quot;, new File(filePath));</span>
+<span class="nc" id="L39">            javaMailSender.send(message);</span>
+<span class="nc" id="L40">            LOGGER.info(&quot;Email sent: &quot;+message);</span>
+<span class="nc" id="L41">        } catch (MessagingException e) {</span>
+<span class="nc" id="L42">            LOGGER.error(&quot; Error Inside sendItinerary(): {}&quot;,e);</span>
+<span class="nc" id="L43">            System.out.println(&quot;Exception inside sendItinerary&quot; + e);</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

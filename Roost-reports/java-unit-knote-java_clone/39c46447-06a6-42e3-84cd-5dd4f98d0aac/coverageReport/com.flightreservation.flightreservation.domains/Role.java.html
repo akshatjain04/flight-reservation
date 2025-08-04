@@ -8,39 +8,38 @@ import java.util.Set;
 
 @Entity
 <span class="nc" id="L10">public class Role extends AbstractEntity implements GrantedAuthority {</span>
+    private String name;
 
-	private String name;
+    @ManyToMany(mappedBy = &quot;roles&quot;)
+    private Set&lt;User&gt; users;
+    // this mapped by tells that the mapping is defined in the roles entity
 
-	@ManyToMany(mappedBy = &quot;roles&quot;)
-	private Set&lt;User&gt; users;
+    public Set&lt;User&gt; getUsers() {
+<span class="nc" id="L18">        return users;</span>
+    }
 
-	// this mapped by tells that the mapping is defined in the roles entity
+    public void setUsers(Set&lt;User&gt; users) {
+<span class="nc" id="L22">        this.users = users;</span>
+<span class="nc" id="L23">    }</span>
 
-	public Set&lt;User&gt; getUsers() {
-<span class="nc" id="L20">		return users;</span>
-	}
+    public String getName() {
+<span class="nc" id="L26">        return name;</span>
+    }
 
-	public void setUsers(Set&lt;User&gt; users) {
-<span class="nc" id="L24">		this.users = users;</span>
-<span class="nc" id="L25">	}</span>
+    public void setName(String name) {
+<span class="nc" id="L30">        this.name = name;</span>
+<span class="nc" id="L31">    }</span>
 
-	public String getName() {
-<span class="nc" id="L28">		return name;</span>
-	}
+    @Override
+    public String toString() {
+<span class="nc" id="L35">        return &quot;Role{&quot; +</span>
+                &quot;name='&quot; + name + '\'' +
+                '}';
+    }
 
-	public void setName(String name) {
-<span class="nc" id="L32">		this.name = name;</span>
-<span class="nc" id="L33">	}</span>
-
-	@Override
-	public String toString() {
-<span class="nc" id="L37">		return &quot;Role{&quot; + &quot;name='&quot; + name + '\'' + '}';</span>
-	}
-
-	@Override
-	public String getAuthority() {
-<span class="nc" id="L42">		return name;</span>
-	}
-
+    @Override
+    public String getAuthority() {
+<span class="nc" id="L42">        return name;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

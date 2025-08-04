@@ -19,68 +19,71 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+
 @Service
 @Transactional
-<span class="nc" id="L24">public class ReservationServiceImpl implements ReservationService {</span>
+<span class="nc" id="L25">public class ReservationServiceImpl implements ReservationService {</span>
 
-	@Value(&quot;${com.flightreservation.flightreservation.itinerary.dirpath}&quot;)
-	private String ITINERARY_DIR;
+    @Value(&quot;${com.flightreservation.flightreservation.itinerary.dirpath}&quot;)
+    private String ITINERARY_DIR;
 
-	@Autowired
-	private FlightRepository flightRepository;
+    @Autowired
+    private FlightRepository flightRepository;
 
-	@Autowired
-	private PassengerRepository passengerRepository;
+    @Autowired
+    private PassengerRepository passengerRepository;
 
-	@Autowired
-	private ReservationRepository reservationRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
-	@Autowired
-	private PdfGenerator pdfGenerator;
+    @Autowired
+    private PdfGenerator pdfGenerator;
 
-	@Autowired
-	private EmailUtil emailUtil;
+    @Autowired
+    private EmailUtil emailUtil;
 
-<span class="nc" id="L44">	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class);</span>
+<span class="nc" id="L45">    private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class);</span>
 
-	@Override
-	public Reservation bookFlight(ReservationRequest reservationRequest) {
-		// make payment here
-		// if the payment is successful proceed..
-<span class="nc" id="L50">		LOGGER.info(&quot;Inside bookFlight()&quot;);</span>
-<span class="nc" id="L51">		Long flightId = reservationRequest.getFlightId();</span>
-<span class="nc" id="L52">		Optional&lt;Flight&gt; flightOptional = flightRepository.findById(flightId);</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">		if (!flightOptional.isPresent()) {</span>
-<span class="nc" id="L54">			throw new FlightNotFound(&quot;No flight found with id &quot; + flightId);</span>
-		}
-<span class="nc" id="L56">		LOGGER.info(&quot;Flight found with id: {}&quot;, flightId);</span>
-<span class="nc" id="L57">		Flight flight = flightOptional.get();</span>
-<span class="nc" id="L58">		Passenger passenger = new Passenger();</span>
-<span class="nc" id="L59">		passenger.setFirstName(reservationRequest.getPassengerFirstName());</span>
-<span class="nc" id="L60">		passenger.setMiddleName(reservationRequest.getPassengerMiddleName());</span>
-<span class="nc" id="L61">		passenger.setLastName(reservationRequest.getPassengerLastName());</span>
-<span class="nc" id="L62">		passenger.setEmail(reservationRequest.getPassengerEmail());</span>
-<span class="nc" id="L63">		passenger.setPhone(reservationRequest.getPassengerPhone());</span>
 
-<span class="nc" id="L65">		passengerRepository.save(passenger);</span>
-<span class="nc" id="L66">		LOGGER.info(&quot;Saved the passenger:&quot; + passenger);</span>
+    @Override
+    public Reservation bookFlight(ReservationRequest reservationRequest) {
+        // make payment here
+        // if the payment is successful proceed..
+<span class="nc" id="L52">        LOGGER.info(&quot;Inside bookFlight()&quot;);</span>
+<span class="nc" id="L53">        Long flightId=reservationRequest.getFlightId();</span>
+<span class="nc" id="L54">        Optional&lt;Flight&gt; flightOptional=flightRepository.findById(flightId);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!flightOptional.isPresent()) {</span>
+<span class="nc" id="L56">            throw new FlightNotFound(&quot;No flight found with id &quot;+flightId);</span>
+        }
+<span class="nc" id="L58">        LOGGER.info(&quot;Flight found with id: {}&quot;,flightId);</span>
+<span class="nc" id="L59">        Flight flight=flightOptional.get();</span>
+<span class="nc" id="L60">        Passenger passenger=new Passenger();</span>
+<span class="nc" id="L61">        passenger.setFirstName(reservationRequest.getPassengerFirstName());</span>
+<span class="nc" id="L62">        passenger.setMiddleName(reservationRequest.getPassengerMiddleName());</span>
+<span class="nc" id="L63">        passenger.setLastName(reservationRequest.getPassengerLastName());</span>
+<span class="nc" id="L64">        passenger.setEmail(reservationRequest.getPassengerEmail());</span>
+<span class="nc" id="L65">        passenger.setPhone(reservationRequest.getPassengerPhone());</span>
 
-<span class="nc" id="L68">		Reservation reservation = new Reservation();</span>
-<span class="nc" id="L69">		reservation.setFlight(flight);</span>
-<span class="nc" id="L70">		reservation.setPassenger(passenger);</span>
-<span class="nc" id="L71">		reservation.setCheckedin(false);</span>
-<span class="nc" id="L72">		final Reservation savedReservation = reservationRepository.save(reservation);</span>
-<span class="nc" id="L73">		LOGGER.info(&quot;Saving the reservation:&quot; + reservation);</span>
+<span class="nc" id="L67">        passengerRepository.save(passenger);</span>
+<span class="nc" id="L68">        LOGGER.info(&quot;Saved the passenger:&quot; + passenger);</span>
 
-<span class="nc" id="L75">		String filePath = ITINERARY_DIR + savedReservation.getId() + &quot;.pdf&quot;;</span>
-<span class="nc" id="L76">		LOGGER.info(&quot;Generating  the itinerary&quot;);</span>
-<span class="nc" id="L77">		pdfGenerator.generateItenary(savedReservation, filePath);</span>
-<span class="nc" id="L78">		LOGGER.info(&quot;Emailing the Itinerary&quot;);</span>
-<span class="nc" id="L79">		emailUtil.sendItenary(&quot;dlulla@akamai.com&quot;, filePath);</span>
+<span class="nc" id="L70">        Reservation reservation=new Reservation();</span>
+<span class="nc" id="L71">        reservation.setFlight(flight);</span>
+<span class="nc" id="L72">        reservation.setPassenger(passenger);</span>
+<span class="nc" id="L73">        reservation.setCheckedin(false);</span>
+<span class="nc" id="L74">        final Reservation savedReservation = reservationRepository.save(reservation);</span>
+<span class="nc" id="L75">        LOGGER.info(&quot;Saving the reservation:&quot; + reservation);</span>
 
-<span class="nc" id="L81">		return savedReservation;</span>
 
-	}
+<span class="nc" id="L78">        String filePath = ITINERARY_DIR + savedReservation.getId()</span>
+                + &quot;.pdf&quot;;
+<span class="nc" id="L80">        LOGGER.info(&quot;Generating  the itinerary&quot;);</span>
+<span class="nc" id="L81">        pdfGenerator.generateItenary(savedReservation,filePath);</span>
+<span class="nc" id="L82">        LOGGER.info(&quot;Emailing the Itinerary&quot;);</span>
+<span class="nc" id="L83">        emailUtil.sendItenary(&quot;dlulla@akamai.com&quot;,filePath);</span>
 
+<span class="nc" id="L85">        return savedReservation;</span>
+
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

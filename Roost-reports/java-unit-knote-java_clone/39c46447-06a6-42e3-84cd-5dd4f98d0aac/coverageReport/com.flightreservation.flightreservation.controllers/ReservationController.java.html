@@ -19,37 +19,35 @@ import java.util.Optional;
 
 @Controller
 <span class="nc" id="L21">public class ReservationController {</span>
+    @Autowired
+    private FlightRepository flightRepository;
 
-	@Autowired
-	private FlightRepository flightRepository;
+    @Autowired
+    private ReservationService reservationService;
 
-	@Autowired
-	private ReservationService reservationService;
+<span class="nc" id="L28">    private static final Logger LOGGER = LoggerFactory.getLogger(ReservationController.class);</span>
 
-<span class="nc" id="L29">	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationController.class);</span>
+    @RequestMapping(&quot;/showCompleteReservation&quot;)
+    public String showCompleteReservation(@RequestParam(&quot;flightId&quot;) Long flightId, ModelMap modelMap){
+<span class="nc" id="L32">        LOGGER.info(&quot;showCompleteReservation() invoked with the Flight Id: &quot; + flightId);</span>
+<span class="nc" id="L33">        Optional&lt;Flight&gt; flight=flightRepository.findById(flightId);</span>
+        // handle error here
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if(!flight.isPresent()){</span>
+<span class="nc" id="L36">            LOGGER.error(&quot;Flight Not found: {}&quot;,flight.toString());</span>
+<span class="nc" id="L37">            throw new FlightNotFound(&quot;flightId &quot;+flightId);</span>
+        }
+<span class="nc" id="L39">        LOGGER.info(&quot;Flight found: {}&quot;,flight.toString());</span>
+<span class="nc" id="L40">        modelMap.addAttribute(&quot;flight&quot;,flight.get());</span>
+<span class="nc" id="L41">        return &quot;reservation/completeReservation&quot;;</span>
+    }
 
-	@RequestMapping(&quot;/showCompleteReservation&quot;)
-	public String showCompleteReservation(@RequestParam(&quot;flightId&quot;) Long flightId, ModelMap modelMap) {
-<span class="nc" id="L33">		LOGGER.info(&quot;showCompleteReservation() invoked with the Flight Id: &quot; + flightId);</span>
-<span class="nc" id="L34">		Optional&lt;Flight&gt; flight = flightRepository.findById(flightId);</span>
-		// handle error here
-<span class="nc bnc" id="L36" title="All 2 branches missed.">		if (!flight.isPresent()) {</span>
-<span class="nc" id="L37">			LOGGER.error(&quot;Flight Not found: {}&quot;, flight.toString());</span>
-<span class="nc" id="L38">			throw new FlightNotFound(&quot;flightId &quot; + flightId);</span>
-		}
-<span class="nc" id="L40">		LOGGER.info(&quot;Flight found: {}&quot;, flight.toString());</span>
-<span class="nc" id="L41">		modelMap.addAttribute(&quot;flight&quot;, flight.get());</span>
-<span class="nc" id="L42">		return &quot;reservation/completeReservation&quot;;</span>
-	}
-
-	@RequestMapping(value = &quot;/completeReservation&quot;, method = RequestMethod.POST)
-	public String completeReservation(ReservationRequest reservationRequest, ModelMap modelMap) {
-<span class="nc" id="L47">		LOGGER.info(&quot;completeReservation() invoked with the Reservation: &quot; + reservationRequest.toString());</span>
-<span class="nc" id="L48">		Reservation reservation = reservationService.bookFlight(reservationRequest);</span>
-<span class="nc" id="L49">		modelMap.addAttribute(&quot;msg&quot;,</span>
-<span class="nc" id="L50">				&quot;Reservation created successfully and the reservation id is &quot; + reservation.getId());</span>
-<span class="nc" id="L51">		return &quot;reservation/reservationConfirmation&quot;;</span>
-	}
+    @RequestMapping(value = &quot;/completeReservation&quot;,method = RequestMethod.POST)
+    public String completeReservation(ReservationRequest reservationRequest, ModelMap modelMap){
+<span class="nc" id="L46">        LOGGER.info(&quot;completeReservation() invoked with the Reservation: &quot; + reservationRequest.toString());</span>
+<span class="nc" id="L47">        Reservation reservation=reservationService.bookFlight(reservationRequest);</span>
+<span class="nc" id="L48">        modelMap.addAttribute(&quot;msg&quot;,&quot;Reservation created successfully and the reservation id is &quot;+reservation.getId());</span>
+<span class="nc" id="L49">        return &quot;reservation/reservationConfirmation&quot;;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

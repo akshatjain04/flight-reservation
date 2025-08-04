@@ -5,61 +5,61 @@ import javax.persistence.Entity;
 @Entity
 <span class="nc" id="L6">public class Passenger extends AbstractEntity {</span>
 
-	private String firstName;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String email;
+    private String phone;
 
-	private String middleName;
+    public String getFirstName() {
+<span class="nc" id="L15">        return firstName;</span>
+    }
 
-	private String lastName;
+    public void setFirstName(String firstName) {
+<span class="nc" id="L19">        this.firstName = firstName;</span>
+<span class="nc" id="L20">    }</span>
 
-	private String email;
+    public String getMiddleName() {
+<span class="nc" id="L23">        return middleName;</span>
+    }
 
-	private String phone;
+    public void setMiddleName(String middleName) {
+<span class="nc" id="L27">        this.middleName = middleName;</span>
+<span class="nc" id="L28">    }</span>
 
-	public String getFirstName() {
-<span class="nc" id="L19">		return firstName;</span>
-	}
+    public String getLastName() {
+<span class="nc" id="L31">        return lastName;</span>
+    }
 
-	public void setFirstName(String firstName) {
-<span class="nc" id="L23">		this.firstName = firstName;</span>
-<span class="nc" id="L24">	}</span>
+    public void setLastName(String lastName) {
+<span class="nc" id="L35">        this.lastName = lastName;</span>
+<span class="nc" id="L36">    }</span>
 
-	public String getMiddleName() {
-<span class="nc" id="L27">		return middleName;</span>
-	}
+    public String getEmail() {
+<span class="nc" id="L39">        return email;</span>
+    }
 
-	public void setMiddleName(String middleName) {
-<span class="nc" id="L31">		this.middleName = middleName;</span>
-<span class="nc" id="L32">	}</span>
+    public void setEmail(String email) {
+<span class="nc" id="L43">        this.email = email;</span>
+<span class="nc" id="L44">    }</span>
 
-	public String getLastName() {
-<span class="nc" id="L35">		return lastName;</span>
-	}
+    public String getPhone() {
+<span class="nc" id="L47">        return phone;</span>
+    }
 
-	public void setLastName(String lastName) {
-<span class="nc" id="L39">		this.lastName = lastName;</span>
-<span class="nc" id="L40">	}</span>
+    public void setPhone(String phone) {
+<span class="nc" id="L51">        this.phone = phone;</span>
+<span class="nc" id="L52">    }</span>
 
-	public String getEmail() {
-<span class="nc" id="L43">		return email;</span>
-	}
-
-	public void setEmail(String email) {
-<span class="nc" id="L47">		this.email = email;</span>
-<span class="nc" id="L48">	}</span>
-
-	public String getPhone() {
-<span class="nc" id="L51">		return phone;</span>
-	}
-
-	public void setPhone(String phone) {
-<span class="nc" id="L55">		this.phone = phone;</span>
-<span class="nc" id="L56">	}</span>
-
-	@Override
-	public String toString() {
-<span class="nc" id="L60">		return &quot;Passenger{&quot; + &quot;firstName='&quot; + firstName + '\'' + &quot;, middleName='&quot; + middleName + '\'' + &quot;, lastName='&quot;</span>
-				+ lastName + '\'' + &quot;, email='&quot; + email + '\'' + &quot;, phone='&quot; + phone + '\'' + '}';
-	}
-
+    @Override
+    public String toString() {
+<span class="nc" id="L56">        return &quot;Passenger{&quot; +</span>
+                &quot;firstName='&quot; + firstName + '\'' +
+                &quot;, middleName='&quot; + middleName + '\'' +
+                &quot;, lastName='&quot; + lastName + '\'' +
+                &quot;, email='&quot; + email + '\'' +
+                &quot;, phone='&quot; + phone + '\'' +
+                '}';
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

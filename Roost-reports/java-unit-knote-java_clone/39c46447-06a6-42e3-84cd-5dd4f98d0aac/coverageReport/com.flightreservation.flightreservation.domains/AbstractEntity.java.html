@@ -7,18 +7,16 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 <span class="nc" id="L9">public class AbstractEntity {</span>
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    public Long getId() {
+<span class="nc" id="L15">        return id;</span>
+    }
 
-	public Long getId() {
-<span class="nc" id="L16">		return id;</span>
-	}
-
-	public void setId(Long id) {
-<span class="nc" id="L20">		this.id = id;</span>
-<span class="nc" id="L21">	}</span>
-
+    public void setId(Long id) {
+<span class="nc" id="L19">        this.id = id;</span>
+<span class="nc" id="L20">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

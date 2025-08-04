@@ -12,22 +12,20 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-<span class="nc" id="L15">public class UserDetailsServiceImpl implements UserDetailsService {</span>
+<span class="nc" id="L15">public class UserDetailsServiceImpl implements UserDetailsService{</span>
+    @Autowired
+    UserRepository userRepository;
 
-	@Autowired
-	UserRepository userRepository;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+<span class="nc" id="L21">        Optional&lt;User&gt; userOptional = userRepository.findByEmail(username);</span>
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="nc" id="L22">		Optional&lt;User&gt; userOptional = userRepository.findByEmail(username);</span>
-
-<span class="nc bnc" id="L24" title="All 2 branches missed.">		if (!userOptional.isPresent()) {</span>
-<span class="nc" id="L25">			throw new UsernameNotFoundException(&quot;User not found for email &quot; + username);</span>
-		}
-<span class="nc" id="L27">		User user = userOptional.get();</span>
-<span class="nc" id="L28">		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),</span>
-<span class="nc" id="L29">				user.getRoles());</span>
-	}
-
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (!userOptional.isPresent()) {</span>
+<span class="nc" id="L24">            throw new UsernameNotFoundException(&quot;User not found for email &quot; + username);</span>
+        }
+<span class="nc" id="L26">        User user=userOptional.get();</span>
+<span class="nc" id="L27">        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),</span>
+<span class="nc" id="L28">                user.getRoles());</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

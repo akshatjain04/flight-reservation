@@ -11,29 +11,29 @@ import org.springframework.stereotype.Service;
 @Service
 <span class="nc" id="L12">public class SecurityServiceImpl implements SecurityService {</span>
 
-	@Autowired
-	UserDetailsService userDetailsService;
+    @Autowired
+    UserDetailsService userDetailsService;
 
-	@Autowired
-	AuthenticationManager authenticationManager;
+    @Autowired
+    AuthenticationManager authenticationManager;
 
-	@Override
-	public boolean login(String username, String password) {
-<span class="nc" id="L22">		UserDetails userDetails = userDetailsService.loadUserByUsername(username);</span>
+    @Override
+    public boolean login(String username, String password) {
+<span class="nc" id="L22">        UserDetails userDetails = userDetailsService.loadUserByUsername(username);</span>
 
-<span class="nc" id="L24">		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password,</span>
-<span class="nc" id="L25">				userDetails.getAuthorities());</span>
+<span class="nc" id="L24">        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password,</span>
+<span class="nc" id="L25">                userDetails.getAuthorities());</span>
 
-<span class="nc" id="L27">		authenticationManager.authenticate(token);</span>
+<span class="nc" id="L27">        authenticationManager.authenticate(token);</span>
 
-<span class="nc" id="L29">		boolean result = token.isAuthenticated();</span>
+<span class="nc" id="L29">        boolean result = token.isAuthenticated();</span>
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">		if (result) {</span>
-<span class="nc" id="L32">			SecurityContextHolder.getContext().setAuthentication(token);</span>
-		}
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (result) {</span>
+<span class="nc" id="L32">            SecurityContextHolder.getContext().setAuthentication(token);</span>
+        }
 
-<span class="nc" id="L35">		return result;</span>
-	}
+<span class="nc" id="L35">        return result;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
